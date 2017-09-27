@@ -1,4 +1,3 @@
-/**
 Authors: Dalton Becker & Sam Selkregg
 Lab: Maze with Touch Sensors
 **/
@@ -6,8 +5,8 @@ Lab: Maze with Touch Sensors
 
 int LEFT_MOTOR = 0;//controls left motor input
 int RIGHT_MOTOR = 3;//controls right motor input
-int sensorOne = 15;//digital input which recieves the first sensor
-int sensorTwo = 13;//digital input which recieves the second sensor
+int sensorFront = 15;//digital input which recieves the first sensor
+int sensorRight = 13;//digital input which recieves the second sensor
 
 /*
 *Method for moving the forward
@@ -61,16 +60,29 @@ void main()
     while(start_button())//while start button is true
       {
         //checks if either of the sensors are touched
-        if(digital(sensorOne)||digital(sensorTwo)
-        {
+        if(digital(sensorFront))
+          {
             //stops the robot, gets it away from the wall, and will turn left
+            printf("Front sensor hit");
             stop();
-            backward();
-            sleep(1);
+            sleep(.1);
+            back();
+            sleep(1.0);
             left();
-            sleep(2);
+            sleep(2.5);
+        }else if(digital(sensorRight))
+          {
+            //bumps the robot left if the sensor on the right goes off
+            printf("Right sensor hit");
+            stop();
+            sleep(.1);
+            back();
+            sleep(.25);
+            left();
+            sleep(.3);
         }
-        forward(); //move forward for .3 seconds before checking sensors again
-        sleep(.3); 
+           forward(); //move forward for .3 seconds before checking sensors again
+           sleep(.3); 
     }
 }
+    
